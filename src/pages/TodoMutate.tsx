@@ -1,22 +1,62 @@
-import { Flex, Typography } from "antd";
+import { Button, Card, Form, Input } from "antd";
 import { useParams } from "react-router-dom";
-
-const { Title } = Typography;
+import { useTranslation } from "react-i18next";
+import { useForm } from "antd/es/form/Form";
 
 function TodoMutate() {
   const todoId = useParams().id;
+  const { t } = useTranslation();
+  const [form] = useForm();
+
+  const onFinish = (values: any) => {
+    console.log(values);
+    form.resetFields();
+  };
+
   return (
-    <Flex
-      justify="center"
-      align="center"
-      style={{
-        height: "100vh",
-      }}
+    <Card
+      title={
+        todoId ? `${t("editingTodo")}: ${todoId}` : t("creatingNewTodo")
+      }
+      style={{ margin: "14px" }}
     >
-      <Title type="success">
-        {todoId ? `Editing Todo ID: ${todoId}` : "Creating New Todo"}
-      </Title>
-    </Flex>
+      <Form form={form} onFinish={onFinish}>
+        <Form.Item
+          name={"name"}
+          label="form.name"
+          rules={[{ required: true, message: "message.required" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name={"email"}
+          label="form.email"
+          rules={[
+            { required: true, message: "message.required" },
+            { type: "email", message: "message.email_error" },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name={"subject"}
+          label="form.subject"
+          rules={[{ required: true, message: "message.required" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name={"message"}
+          label="form.message"
+          rules={[{ required: true, message: "message.required" }]}
+        >
+          <Input.TextArea />
+        </Form.Item>
+        <Form.Item>
+          <Button htmlType="submit"> {t("button.submit")}</Button>
+        </Form.Item>
+      </Form>
+    </Card>
   );
 }
 

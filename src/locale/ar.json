@@ -1,3 +1,36 @@
 {
-    "title": "الدعم"
+  "title": "الدعم",
+  "createTodo": "إنشاء تذكرة",
+  "listTodos": "قائمة التذاكر",
+  "listingTodos": "عرض التذاكر",
+  "todoId": "رقم التذكرة",
+  "editingTodo": "تعديل التذكرة رقم",
+  "creatingNewTodo": "إنشاء تذكرة جديدة",
+  "table": {
+    "id": "المعرف",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "subject": "الموضوع",
+    "status": "الحالة",
+    "createdAt": "تاريخ الإنشاء"
+  },
+  "status": {
+    "open": "مفتوحة",
+    "inProgress": "قيد المعالجة",
+    "resolved": "محلولة",
+    "closed": "مغلقة"
+  },
+  "form": {
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "subject": "الموضوع",
+    "message": "الرسالة"
+  },
+  "message": {
+    "required": "هذا الحقل مطلوب",
+    "email_error": "يرجى إدخال عنوان بريد إلكتروني صالح"
+  },
+  "button": {
+    "submit": "إرسال"
+  }
 }
