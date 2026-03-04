@@ -81,17 +81,42 @@ export const listTodos = async (): Promise<Todo[]> => {
   );
 };
 
-export const getTodo = async (id: string): Promise<Todo | null> => {
+export const getTodo = async (id: string): Promise<Todo> => {
   await delay();
 
   const todos = getTodosFromStorage();
   const todo = todos.find((t) => t.id === id);
 
   if (!todo) {
-    throw new Error(`Todo with ID ${id} not found`);
+    throw new Error(`Ticket with ID ${id} not found`);
   }
 
   return todo;
+};
+
+export const updateTodo = async (
+  id: string,
+  data: UpdateTodoDto,
+): Promise<Todo> => {
+  await delay();
+
+  const todos = getTodosFromStorage();
+  const todoIndex = todos.findIndex((t) => t.id === id);
+
+  if (todoIndex === -1) {
+    throw new Error(`Ticket with ID ${id} not found`);
+  }
+
+  const updatedTodo: Todo = {
+    ...todos[todoIndex],
+    ...data,
+    updatedAt: new Date().toISOString(),
+  };
+
+  todos[todoIndex] = updatedTodo;
+  saveTodosToStorage(todos);
+
+  return updatedTodo;
 };
 
 export const deleteTodo = async (id: string): Promise<void> => {
@@ -101,7 +126,7 @@ export const deleteTodo = async (id: string): Promise<void> => {
   const filteredTodos = todos.filter((t) => t.id !== id);
 
   if (todos.length === filteredTodos.length) {
-    throw new Error(`Todo with ID ${id} not found`);
+    throw new Error(`Ticket with ID ${id} not found`);
   }
 
   saveTodosToStorage(filteredTodos);
